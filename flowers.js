@@ -34,4 +34,4 @@ const Flowers = [
   },
 ];
 
-module.export = Flowers;
+module.exports = Flowers;
