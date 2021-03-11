@@ -8,12 +8,14 @@ const app = express();
 app.use(cors());
 app.use(express.json()); //instead of body parser
 
+app.use("/images", express.static("images"));
+
 app.get("/", (request, response) => {
   response.json({ message: "hello world!" });
 });
 
 app.get("/flowers", (request, response) => {
-  request.json(flowers);
+  response.json(flowers);
 });
 
 // app.delete("/flowers/1", (req, res) => {
