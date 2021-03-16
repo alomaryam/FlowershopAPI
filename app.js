@@ -2,6 +2,7 @@ const express = require("express");
 let flowers = require("./flowers");
 const cors = require("cors");
 const slugify = require("slugify");
+const db = require("./db/models");
 
 const app = express();
 
@@ -49,6 +50,15 @@ app.post("/flowers", (request, response) => {
   response.status(201).json(newFlower);
 });
 
-app.listen(8001, () => {
-  console.log("The application is running on localhost:8001");
-});
+const run = async () => {
+  try {
+    await db.sequelize.sync();
+    console.log("Connection to the database successful!");
+    await app.listen(8001, () => {
+      console.log("The application is running on localhost:8001");
+    });
+  } catch (error) {
+    console.error("Error connecting to the database", error);
+  }
+};
+run();
