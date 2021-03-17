@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const { Home, flowerGet, flowerDelete, flowerPost } = require("./controllers");
+const { Home, flowerList, flowerDelete, flowerPost } = require("./controllers");
 
-router.use("../../images", express.static("images"));
+router.use("../images", express.static("images"));
 
 router.get("/", Home);
 
-router.get("/flowers", flowerGet);
+router.get("/flowers", flowerList);
 
 router.delete("/flowers/:flowerID", flowerDelete);
 

@@ -1,4 +1,4 @@
-// const { Flower } = require("../../db/models");
+const { Flower } = require("../../db/models");
 let flowers = require("../../flowers");
 const slugify = require("slugify");
 
@@ -6,8 +6,15 @@ exports.Home = (request, response) => {
   response.json({ message: "hello world!" });
 };
 
-exports.flowerGet = (request, response) => {
-  response.json(flowers);
+exports.flowerList = async (request, response) => {
+  try {
+    const flower = await Flower.findAll({
+      attributes: { exclude: ["createdAt", "updatedAt"] },
+    });
+    response.status(200).json(flower);
+  } catch (error) {
+    response.status(500).json({ message: error.message });
+  }
 };
 
 exports.flowerDelete = (request, response) => {
