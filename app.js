@@ -2,10 +2,13 @@ const express = require("express");
 const cors = require("cors");
 const db = require("./db/models");
 const app = express();
+
+//flower route
 const flowerRoutes = require("./API/flowers/routers");
 
 app.use(cors());
 app.use(express.json()); //instead of body parser
+
 app.use(flowerRoutes);
 
 const run = async () => {

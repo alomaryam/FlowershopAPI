@@ -1,6 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const { Home, flowerList, flowerDelete, flowerPost } = require("./controllers");
+const {
+  Home,
+  flowerList,
+  flowerCreate,
+  flowerUpdate,
+  flowerDelete,
+} = require("./controllers");
 
 router.use("../images", express.static("images"));
 
@@ -8,8 +14,10 @@ router.get("/", Home);
 
 router.get("/flowers", flowerList);
 
-router.delete("/flowers/:flowerID", flowerDelete);
+router.post("/flowers", flowerCreate);
 
-router.post("/flowers", flowerPost);
+router.put("/flowers/:flowerID", flowerUpdate);
+
+router.delete("/flowers/:flowerID", flowerDelete);
 
 module.exports = router;
